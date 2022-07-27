@@ -154,6 +154,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 Navigator.pushNamed(context, '/login');
                                 usernameController.clear();
                                 passwordController.clear();
+                                setState(() => _submitted = false);
                               }
 
                             },

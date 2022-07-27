@@ -146,6 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (loginValidate) {
                               if (usernameController.text == username &&
                                   passwordController.text == password) {
+                                    setState(() => _submitted = false);
                                 Navigator.pushNamed(context, '/song');
                                 usernameController.clear();
                                 passwordController.clear();
