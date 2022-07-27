@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: "Username",
+                        label: const Text("username", style: TextStyle(fontSize: 13),),
                         prefixIcon: const Icon(
                           Icons.person,
                           color: Colors.white,
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                           Icons.lock,
                           color: Colors.white,
                         ),
-                        labelText: "Password",
+                        label: const Text("password", style: TextStyle(fontSize: 13),),
                         labelStyle: TextStyle(color: Colors.grey[100]),
                         suffixIcon: IconButton(
                           onPressed: () {
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Container(
+                    SizedBox(
                       height: 30,
                       child: GestureDetector(
                         onTap: () {
@@ -126,7 +126,6 @@ class _LoginPageState extends State<LoginPage> {
                     //   height: 20,
                     // ),
                     SizedBox(
-                      height: 45,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary: Colors.greenAccent[400]),
@@ -166,27 +165,6 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                               }
                             }
-
-                            // if (usernameController.text == username &&
-                            //     passwordController.text == password) {
-                            //   Navigator.pushNamed(context, '/song');
-                            //   usernameController.clear();
-                            //   passwordController.clear();
-                            // } else {
-                            //   if (usernameController.text.isNotEmpty &&
-                            //       passwordController.text.isNotEmpty) {
-                            //     var snackBar = const SnackBar(
-                            //       backgroundColor: Colors.red,
-                            //       duration: Duration(seconds: 1),
-                            //       content:
-                            //           Text('Invalid username or password !'),
-                            //     );
-                            //     ScaffoldMessenger.of(context)
-                            //         .showSnackBar(snackBar);
-                            //   } else {
-                            //     Container();
-                            //   }
-                            // }
                           },
                           child: const Text("Login")),
                     ),

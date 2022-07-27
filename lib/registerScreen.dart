@@ -64,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                       },
                       decoration: InputDecoration(
-                        labelText: "Username",
+                        label: const Text("username", style: TextStyle(fontSize: 13),),
                         prefixIcon: const Icon(
                           Icons.person,
                           color: Colors.white,
@@ -94,7 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Icons.lock,
                           color: Colors.white,
                         ),
-                        labelText: "Password",
+                        label: const Text("password", style: TextStyle(fontSize: 13),),
                         labelStyle: TextStyle(color: Colors.grey[100]),
                         suffixIcon: IconButton(
                           onPressed: () {
@@ -115,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Container(
+                    SizedBox(
                       height: 30,
                       child: GestureDetector(
                         onTap: () {
@@ -130,7 +130,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     SizedBox(
                         width: double.infinity,
-                        height: 45,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 primary: Colors.greenAccent[400]),
