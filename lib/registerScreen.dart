@@ -13,6 +13,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final _formKey = GlobalKey<FormState>();
 
+  bool _submitted = false;
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -26,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
             style: TextStyle(color: Colors.grey[100]),
             child: Form(
               key: _formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              autovalidateMode: _submitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
               child: Center(
                 child: ListView(
                   shrinkWrap: true,
@@ -134,6 +136,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 primary: Colors.greenAccent[400]),
                             onPressed: () async {
                               FocusScope.of(context).unfocus();
+
+                              setState(() => _submitted = true);
     
                               final usernameValid =
                                   _formKey.currentState!.validate();

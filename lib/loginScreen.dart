@@ -11,6 +11,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var isVisible = true;
 
+  bool _submitted = false;
+
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController usernameController = TextEditingController();
@@ -26,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(color: Colors.grey[100]),
             child: Form(
               key: _formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              autovalidateMode: _submitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
               child: Center(
                 child: ListView(
                   shrinkWrap: true,
@@ -130,6 +132,9 @@ class _LoginPageState extends State<LoginPage> {
                               primary: Colors.greenAccent[400]),
                           onPressed: () async {
                             FocusScope.of(context).unfocus();
+
+                            setState(() => _submitted = true);
+
                             final prefs = await SharedPreferences.getInstance();
                             final String? username =
                                 prefs.getString('username');
@@ -139,27 +144,27 @@ class _LoginPageState extends State<LoginPage> {
                             final loginValidate =
                                 _formKey.currentState!.validate();
 
-                            if(loginValidate){
+                            if (loginValidate) {
                               if (usernameController.text == username &&
-                                passwordController.text == password) {
-                              Navigator.pushNamed(context, '/song');
-                              usernameController.clear();
-                              passwordController.clear();
-                            } else {
-                              if (usernameController.text.isNotEmpty &&
-                                  passwordController.text.isNotEmpty) {
-                                var snackBar = const SnackBar(
-                                  backgroundColor: Colors.red,
-                                  duration: Duration(seconds: 1),
-                                  content:
-                                      Text('Invalid username or password !'),
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
+                                  passwordController.text == password) {
+                                Navigator.pushNamed(context, '/song');
+                                usernameController.clear();
+                                passwordController.clear();
                               } else {
-                                Container();
+                                if (usernameController.text.isNotEmpty &&
+                                    passwordController.text.isNotEmpty) {
+                                  var snackBar = const SnackBar(
+                                    backgroundColor: Colors.red,
+                                    duration: Duration(seconds: 1),
+                                    content:
+                                        Text('Invalid username or password !'),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                } else {
+                                  Container();
+                                }
                               }
-                            }
                             }
 
                             // if (usernameController.text == username &&
