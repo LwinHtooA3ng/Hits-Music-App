@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hits/songScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   var isVisible = true;
 
   List User = [
@@ -18,6 +18,43 @@ class _LoginPageState extends State<LoginPage> {
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  bool isError = true;
+  String? usernameErrorText = null;
+  String? passwordErrorText = null;
+
+  void usernameValidator() {
+    if (usernameController.text.isEmpty) {
+      setState(() {
+        usernameErrorText = "Username required";
+        isError = true;
+      });
+    } else {
+      setState(() {
+        usernameErrorText = null;
+        isError = false;
+      });
+    }
+  }
+
+  void passwordValidator() {
+    if (passwordController.text.isEmpty) {
+      setState(() {
+        passwordErrorText = "Password required";
+        isError = true;
+      });
+    } else if (passwordController.text.length < 6) {
+      setState(() {
+        passwordErrorText = "Password need at least 6 character";
+        isError = true;
+      });
+    } else {
+      setState(() {
+        passwordErrorText = null;
+        isError = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 15,
                   ),
                   const Text(
-                    "Login",
+                    "Register",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 23,
@@ -53,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: "Username",
-                      // errorText: _errorText,
+                      errorText: usernameErrorText,
                       prefixIcon: const Icon(
                         Icons.person,
                         color: Colors.white,
@@ -62,13 +99,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   TextField(
                     controller: passwordController,
                     style: const TextStyle(color: Colors.white),
                     obscureText: isVisible,
                     decoration: InputDecoration(
+                      errorText: passwordErrorText,
                       prefixIcon: const Icon(
                         Icons.lock,
                         color: Colors.white,
@@ -98,10 +136,10 @@ class _LoginPageState extends State<LoginPage> {
                     height: 30,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/register');
+                        Navigator.pushNamed(context, '/login');
                       },
                       child: const Text(
-                        "Don't have an account? Register Here",
+                        "Already have an account? Log In",
                         style:
                             TextStyle(fontSize: 10, color: Colors.greenAccent),
                       ),
@@ -111,44 +149,32 @@ class _LoginPageState extends State<LoginPage> {
                   //   height: 20,
                   // ),
                   SizedBox(
-                    height: 45,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.greenAccent[400]),
-                        onPressed: () async {
-                          FocusScope.of(context).unfocus();
-                          final prefs = await SharedPreferences.getInstance();
-                          final String? username = prefs.getString('username');
-                          final String? password = prefs.getString('password');
-                          // usernameValidate();
+                      width: double.infinity,
+                      height: 45,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.greenAccent[400]),
+                          onPressed: () async {
+                            FocusScope.of(context).unfocus();
+                            usernameValidator();
+                            passwordValidator();
+                            // Navigator.pushNamed(context, '/register');
+                            if (!isError) {
+                              final prefs =
+                                  await SharedPreferences.getInstance();
 
-                          if (usernameController.text == username &&
-                              passwordController.text == password) {
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (context) {
-                            //   return const HitsStl();
-                            // }));
+                              await prefs.setString(
+                                  'username', usernameController.text);
 
-                            Navigator.pushNamed(context, '/song');
-                            usernameController.clear();
-                            passwordController.clear();
-                          } else {
-                            if (usernameController.text.isNotEmpty &&
-                                passwordController.text.isNotEmpty) {
-                              var snackBar = const SnackBar(
-                                backgroundColor: Colors.red,
-                                duration: Duration(seconds: 1),
-                                content: Text('Invalid username or password !'),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            } else {
-                              Container();
+                              await prefs.setString(
+                                  "password", passwordController.text);
+
+                              Navigator.pushNamed(context, '/login');
+                              usernameController.clear();
+                              passwordController.clear();
                             }
-                          }
-                        },
-                        child: const Text("Login")),
-                  ),
+                          },
+                          child: const Text("Register"))),
                 ],
               ),
             )),

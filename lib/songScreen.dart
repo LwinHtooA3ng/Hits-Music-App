@@ -18,14 +18,14 @@ class _HitsStfState extends State<HitsStf> {
 
   var play_pause = true;
 
-  playSong(a, b, c, d) {
+  playSong(songName, Singer, SongImage, Song) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          playSongName = a;
-          playSinger = b;
-          playSongImage = c;
-          song = d;
+          playSongName = songName;
+          playSinger = Singer;
+          playSongImage = SongImage;
+          song = Song;
           if (play_pause == true) {
             audioPlayer.play(song, isLocal: true);
             play_pause = !play_pause;
@@ -36,9 +36,9 @@ class _HitsStfState extends State<HitsStf> {
         });
       },
       child: SongCard(
-        songName: a,
-        singer: b,
-        image: c,
+        songName: songName,
+        singer: Singer,
+        image: SongImage,
       ),
     );
   }

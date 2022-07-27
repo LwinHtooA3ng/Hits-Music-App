@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'loginScreen.dart';
 import 'songScreen.dart';
+import 'startScreen.dart';
+import 'registerScreen.dart';
 
 void main() => runApp(const MusicApp());
 
@@ -10,11 +12,30 @@ class MusicApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        inputDecorationTheme: const InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          ),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       title: "Main",
       initialRoute: '/',
       routes: {
-        '/': (context) => const LoginPage(),
+        '/': (context) => const startScreen(),
+        '/register': (context) => const RegisterPage(),
+        '/login': (context) => const LoginPage(),
         '/song': (context) => const HitsStf()
       },
     );
