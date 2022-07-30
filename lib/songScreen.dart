@@ -50,7 +50,8 @@ class _HitsStfState extends State<HitsStf> {
                             IconButton(
                                 onPressed: () {
                                   audioPlayer.pause();
-                                  Navigator.pop(context);
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context, '/', (route) => false);
                                 },
                                 icon: Icon(
                                   Icons.logout,
@@ -65,10 +66,9 @@ class _HitsStfState extends State<HitsStf> {
                           child: ListView.builder(
                               // itemCount: myPlaylists.length,
                               itemCount: myPlaylists.getLength(),
-
                               itemBuilder: (context, index) {
                                 return SongCard(
-                                  songName: myPlaylists.getSongName(index),                                  
+                                  songName: myPlaylists.getSongName(index),
                                   singer: myPlaylists.getSinger(index),
                                   image: myPlaylists.getSongImage(index),
                                   onTap: () {

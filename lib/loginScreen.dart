@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 30,
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/register');
+                          Navigator.pushReplacementNamed(context, '/register');
                         },
                         child: const Text(
                           "Don't have an account? Register Here",
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                               if (usernameController.text == username &&
                                   passwordController.text == password) {
                                     setState(() => _submitted = false);
-                                Navigator.pushNamed(context, '/song');
+                                Navigator.pushReplacementNamed(context, '/song');
                                 usernameController.clear();
                                 passwordController.clear();
                               } else {
