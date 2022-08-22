@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Center(
                 child: ListView(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 35),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   children: [
                     const SizedBox(
                       height: 15,
@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.greenAccent),
                     ),
                     const SizedBox(
-                      height: 25,
+                      height: 20,
                     ),
                     TextFormField(
                       controller: usernameController,
@@ -115,16 +115,17 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           Navigator.pushReplacementNamed(context, '/register');
                         },
-                        child: const Text(
-                          "Don't have an account? Register Here",
-                          style: TextStyle(
-                              fontSize: 10, color: Colors.greenAccent),
-                        ),
+                        child: Row(children: [
+                          Text("Don't have an account? ",   style: TextStyle(
+                              fontSize: 10, color: Colors.grey[100]),),
+                          const Text("Register",   style: TextStyle(
+                              fontSize: 10, color: Colors.greenAccent),)
+                        ]),
                       ),
                     ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     SizedBox(
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(

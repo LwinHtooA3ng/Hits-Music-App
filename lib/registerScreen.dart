@@ -32,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Center(
                 child: ListView(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 35),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   children: [
                     const SizedBox(
                       height: 15,
@@ -121,12 +121,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         onTap: () {
                           Navigator.pushReplacementNamed(context, '/login');
                         },
-                        child: const Text(
-                          "Already have an account? Log In",
-                          style: TextStyle(
-                              fontSize: 10, color: Colors.greenAccent),
-                        ),
+                        child: Row(children: [
+                          Text("Already have an account? ",   style: TextStyle(
+                              fontSize: 10, color: Colors.grey[100]),),
+                          const Text("Log In",   style: TextStyle(
+                              fontSize: 10, color: Colors.greenAccent),)
+                        ]),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 5,
                     ),
                     SizedBox(
                         width: double.infinity,

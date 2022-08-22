@@ -38,7 +38,7 @@ class _HitsStfState extends State<HitsStf> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

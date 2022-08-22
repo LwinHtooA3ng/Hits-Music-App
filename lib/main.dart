@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'loginScreen.dart';
 import 'songScreen.dart';
-import 'startScreen.dart';
+import 'landing.dart';
 import 'registerScreen.dart';
 
 void main() => runApp(const MusicApp());
@@ -34,7 +34,7 @@ class MusicApp extends StatelessWidget {
       title: "Main",
       initialRoute: '/',
       routes: {
-        '/': (context) => const startScreen(),
+        '/': (context) => const Home(),
         '/register': (context) => const RegisterPage(),
         '/login': (context) => const LoginPage(),
         '/song': (context) => const HitsStf()
